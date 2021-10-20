@@ -52,6 +52,9 @@
   <ItemGroup>
     <Compile Include="Classess\AbstractFactoryQuery.cs" />
     <Compile Include="Classess\CollectionStringDB.cs" />
+    <Compile Include="Classess\DataTableAsync.cs" />
+    <Compile Include="Classess\DataTableBD.cs" />
+    <Compile Include="Classess\DateResult.cs" />
     <Compile Include="Classess\DateTimeSelect.cs" />
     <Compile Include="Classess\FindPersonAge55Femal.cs" />
     <Compile Include="Classess\FindPersonAge60Men.cs" />

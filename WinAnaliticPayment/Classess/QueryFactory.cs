@@ -9,8 +9,6 @@ namespace WinAnaliticPayment.Classess
     public class QueryFactory : AbstractFactoryQuery
     {
 
-        
-
         /// <summary>
         /// Поиск женщин чей возраст больше или равно 55 лет.
         /// </summary>
