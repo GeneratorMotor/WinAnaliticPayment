@@ -9,12 +9,12 @@ namespace WinAnaliticPayment.Classess
 {
     public class DateResult
     {
-        private Task<DataTable> dataTableAsyncdta60M = null;
+        private Task<DataTable> dataTable = null;
         private string region = string.Empty;
 
-        public DateResult(Task<DataTable> dataTableAsyncdta60M, string nameRegion)
+        public DateResult(Task<DataTable> dataTable, string nameRegion)
         {
-            this.dataTableAsyncdta60M = dataTableAsyncdta60M ?? throw new ArgumentNullException(nameof(dataTableAsyncdta60M));
+            this.dataTable = dataTable ?? throw new ArgumentNullException(nameof(dataTable));
 
             this.region = nameRegion;
         }
@@ -23,7 +23,7 @@ namespace WinAnaliticPayment.Classess
         {
             bool flagError = false;
 
-            if (dataTableAsyncdta60M.Exception != null)
+            if (dataTable.Exception != null)
             {
                 flagError = true;
             }
@@ -33,12 +33,12 @@ namespace WinAnaliticPayment.Classess
 
         public string MessageError()
         {
-            return this.region + " " + dataTableAsyncdta60M.Exception.InnerException.Message;
+            return this.region + " " + dataTable.Exception.InnerException.Message;
         }
 
         public DataTable getData()
         {
-            return this.dataTableAsyncdta60M.Result;
+            return this.dataTable.Result;
         }
     }
 }

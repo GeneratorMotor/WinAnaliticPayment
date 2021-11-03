@@ -33,6 +33,10 @@ namespace WinAnaliticPayment.Classess
             return date;
         }
 
+        /// <summary>
+        /// Дата поиска женщин которым исполниться 55 лет.
+        /// </summary>
+        /// <returns></returns>
         public string DateAgeStartFemal()
         {
             string date = GetYearForFemal().ToString().Trim() + GetMinusMonth().ToString().Trim() + "01";
@@ -76,6 +80,28 @@ namespace WinAnaliticPayment.Classess
         /// Дата начала поиска умерших льготников.
         /// </summary>
         /// <returns></returns>
+        public string DateStartMonthDead()
+        {
+            string date = GetYearDead().ToString().Trim() + GetMinusMonth().ToString().Trim() + "01";
+
+            return date;
+        }
+
+        /// <summary>
+        /// Дата окончания поиска умерших льготников.
+        /// </summary>
+        /// <returns></returns>
+        public string DateEndMonthDead()
+        {
+            string date = GetYearDead().ToString().Trim() + GetMinusMonth().ToString().Trim() + "25";
+
+            return date;
+        }
+
+        /// <summary>
+        /// Дата начала поиска умерших льготников.
+        /// </summary>
+        /// <returns></returns>
         public string DateAgeStart()
         {
             return GetYearMonth(GetMonth()) + "01";
@@ -109,6 +135,21 @@ namespace WinAnaliticPayment.Classess
             return dateDeath;
 
         }
+
+        private int GetYearDead()
+        {
+            string month = GetMinusMonth();
+
+            int year = date.Year;
+
+            if(month.ToLower().Trim() == "01".ToLower().Trim())
+            {
+                year--;
+            }
+
+            return year;
+        }
+
 
         /// <summary>
         /// Год рождения Женщины.

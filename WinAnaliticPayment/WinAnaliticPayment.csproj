@@ -56,18 +56,25 @@
     <Compile Include="Classess\DataTableBD.cs" />
     <Compile Include="Classess\DateResult.cs" />
     <Compile Include="Classess\DateTimeSelect.cs" />
+    <Compile Include="Classess\FindBabyPay.cs" />
+    <Compile Include="Classess\FindPerson.cs" />
     <Compile Include="Classess\FindPersonAge55Femal.cs" />
     <Compile Include="Classess\FindPersonAge60Men.cs" />
     <Compile Include="Classess\FindPersonHead.cs" />
     <Compile Include="Classess\FindPersonWillBeFemali.cs" />
     <Compile Include="Classess\GetQueryConnectionStrings.cs" />
     <Compile Include="Classess\IQuery.cs" />
+    <Compile Include="Classess\LoadLK.cs" />
+    <Compile Include="Classess\LogError.cs" />
     <Compile Include="Classess\PersonAge60and55.cs" />
     <Compile Include="Classess\PersonHead.cs" />
     <Compile Include="Classess\PersonWillBeAge55and60.cs" />
     <Compile Include="Classess\QueryFactory.cs" />
     <Compile Include="Classess\FindPersonWillBeMen.cs" />
+    <Compile Include="Classess\CountPersonResultLK.cs" />
+    <Compile Include="Classess\ResultValidate.cs" />
     <Compile Include="Classess\StringConnection.cs" />
+    <Compile Include="Classess\ЛьготнаяКатегория.cs" />
     <Compile Include="Classess\ТаблицаБД.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

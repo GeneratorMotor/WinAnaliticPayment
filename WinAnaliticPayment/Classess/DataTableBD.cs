@@ -27,24 +27,24 @@ namespace WinAnaliticPayment.Classess
             return ds.Tables[0];
         }
 
-        public static async Task<DataTable> GatTableAsync(string query, string connectionString, string nameTable)
-        {
-            DataSet ds = new DataSet();
+        //public static async Task<DataTable> GatTableAsync(string query, string connectionString, string nameTable)
+        //{
+        //    DataSet ds = new DataSet();
 
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                con.Open();
+        //    using (SqlConnection con = new SqlConnection(connectionString))
+        //    {
+        //        con.Open();
 
-                SqlCommand com = new SqlCommand(query, con);
-                com.CommandTimeout = 0;
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        com.CommandTimeout = 0;
 
-                SqlDataAdapter da = new SqlDataAdapter(com);
+        //        SqlDataAdapter da = new SqlDataAdapter(com);
 
-                da.Fill(ds, nameTable);
-                //con.Close();
-            }
+        //        da.Fill(ds, nameTable);
+        //        //con.Close();
+        //    }
 
-            return ds.Tables[0];
-        }
+        //    return ds.Tables[0];
+        //}
     }
 }
