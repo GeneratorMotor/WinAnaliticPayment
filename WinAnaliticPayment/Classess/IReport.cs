@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace WinAnaliticPayment.Classess
 {
-    public class LogError
+    public interface IReport
     {
-        public string MessageError { get; set; }
-
-        public string Region { get; set; }
+        void Print();
     }
 }

@@ -1,6 +1,10 @@
 using System;
 using Xunit;
+using System.IO;
+using System.Collections.Generic;
 using WinAnaliticPayment.Classess;
+using WinAnaliticPayment.Reports;
+
 
 namespace UnitTestProject
 {
@@ -126,5 +130,51 @@ namespace UnitTestProject
         //    Assert.Equal("19611025", dDead);
 
         //}
+
+        [Fact]
+        public void ReportPrintTest()
+        {
+
+            // Пролучим ссылку на документ.
+            ReportCopyPattern reportCopyPattern = new ReportCopyPattern();
+
+            // Получим имя файла.
+            string fileNameReport = reportCopyPattern.GetFileName();
+
+            // string fName = "РайоныОбласти";
+
+            ////try
+            ////{
+
+            ////var test = fName;
+
+            ////Скопируем шаблон в папку Документы
+            //FileInfo fn = new FileInfo(System.Windows.Forms.Application.StartupPath + @"\Шаблон\РайоныОбласти.docx");
+            //fn.CopyTo(@"F:\VS 2019 проекты\WinAnaliticPayment\WinAnaliticPayment" + @"\Документы\" + fName + ".docx", true);
+
+            ////idProcessWord = System.Diagnostics.Process.Start(System.Windows.Forms.Application.StartupPath + @"\Документы\" + fName + ".doc").Id;
+            ////}
+            ////catch
+            ////{
+
+            ////    //idProcessWord = System.Diagnostics.Process.Start(System.Windows.Forms.Application.StartupPath + @"\Документы\" + fName + ".doc").Id;
+
+            ////    System.Windows.Forms.MessageBox.Show("Возможно у вас уже открыт договор с этим льготником. Закройте этот договор.");
+            ////    return;
+            ////}
+
+            //string fileNameReport = @"F:\VS 2019 проекты\WinAnaliticPayment\WinAnaliticPayment" + @"\Документы\" + fName + ".docx";
+
+
+            // Arrage.
+            //List<string> listRegions = new List<string>();
+            //listRegions.Add("Вольский");
+            //listRegions.Add("Балаковский");
+
+            //// Act.
+            //PrintErrorRegions printErrorRegions = new PrintErrorRegions(listRegions);
+            //printErrorRegions.Print();
+
+        }
     }
 }

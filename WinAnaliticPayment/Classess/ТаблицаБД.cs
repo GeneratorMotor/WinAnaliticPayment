@@ -46,11 +46,11 @@ namespace WinAnaliticPayment.Classess
         /// <summary>
         /// Возвращает количество льготников.
         /// </summary>
-        /// <param name="stringConnection"></param>
-        /// <param name="query"></param>
-        /// <param name="nameTable"></param>
+        /// <param name="stringConnection">Строка подключения к БД</param>
+        /// <param name="query">SQL запрос к БД</param>
+        /// <param name="nameTable">Название таблицы в DataSet</param>
         /// <returns></returns>
-        public static int GetDateCountPerson(string stringConnection, string query, string nameTable)
+        public static int GetDateCountPerson(string stringConnection, string query, string nameTable, List<LogError> listError, string region)
         {
             DataSet ds = new DataSet();
 
@@ -76,12 +76,18 @@ namespace WinAnaliticPayment.Classess
                 }
                 catch (Exception ex)
                 {
-                    //System.Windows.Forms.MessageBox.Show("Ошибка при выполнении запроса - " + query + " описание ошибки  - " + ex.Message);
-
+                    
+                    // Создадим лог.
                     LogError logError = new LogError();
-                    //logError.MessageError = "Ошибка при выполнении запроса - " + ex.Message;
-                    //logError.MessageError.Add()
 
+                    // Описание ошибки.
+                    logError.MessageError = "Ошибка при выполнении запроса - " + ex.Message;
+
+                    // Район области, где произошла ошибка.
+                    logError.Region = region;
+
+                    // Добавим ошибку в список ошибок.
+                    listError.Add(logError);
 
                     result = 0;
                 }

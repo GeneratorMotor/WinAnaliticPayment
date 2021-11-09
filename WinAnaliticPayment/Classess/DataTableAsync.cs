@@ -45,11 +45,11 @@ namespace WinAnaliticPayment.Classess
         //    }
         //}
 
-        public int GetCountPerson()
-        {
-            GetDataTableAsync();
-            return countPerson;
-        }
+        //public int GetCountPerson()
+        //{
+        //    GetDataTableAsync();
+        //    return countPerson;
+        //}
 
         /// <summary>
         /// Возвращает флаг указывающий о наличии ошибки.
@@ -68,32 +68,32 @@ namespace WinAnaliticPayment.Classess
         //public async Task<int> GetDataTableAsync()
         //public async void GetDataTableAsync()
         //private async void GetDataTableAsync()
-        private async void GetDataTableAsync()
-        {
+        //private async void GetDataTableAsync()
+        //{
 
-            try
-            {
-                ////return await ТаблицаБД.GetDataTableAsync(this.connetionString, this.query, this.nameTable);
+        //    try
+        //    {
+        //        ////return await ТаблицаБД.GetDataTableAsync(this.connetionString, this.query, this.nameTable);
 
-                //return await Task.Run<int>(() =>
-                //{
-                countPerson = await Task.Run<int>(() =>
-                {
+        //        //return await Task.Run<int>(() =>
+        //        //{
+        //        countPerson = await Task.Run<int>(() =>
+        //        {
 
-                    int count = ТаблицаБД.GetDateCountPerson(this.connectionString, this.query, this.nameTable);
+        //            int count = ТаблицаБД.GetDateCountPerson(this.connectionString, this.query, this.nameTable);
 
-                    return count;
+        //            return count;
 
-                    //return Convert.ToInt32(tab.Rows[0]["CountRows"]);
-                });
+        //            //return Convert.ToInt32(tab.Rows[0]["CountRows"]);
+        //        });
 
-            }
-            catch (Exception ex)
-            {
-                flagError = true;
-                error = await Task.FromException<string>(ex);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        flagError = true;
+        //        error = await Task.FromException<string>(ex);
+        //    }
+        //}
 
     }
 }

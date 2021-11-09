@@ -29,11 +29,11 @@ namespace WinAnaliticPayment.Classess
             if (this.dta.ValidError() == false)
             {
                 // Получаем результат.
-                countPerson = this.dta.GetCountPerson();
+                //countPerson = this.dta.GetCountPerson();
             }
             else
             {
-                this.logError.MessageError.Add(this.nameRegion,this.dta.MessageError());
+               // this.logError.MessageError.Add(this.nameRegion,this.dta.MessageError());
             }
 
             return countPerson;
