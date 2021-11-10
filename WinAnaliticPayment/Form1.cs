@@ -16,6 +16,9 @@ namespace WinAnaliticPayment
     public partial class Form1 : Form
     {
         private int iCount = 1;
+
+        // Переменная для хранения количества льготников.
+        List<CountPersonResultLK> list;
         public Form1()
         {
             InitializeComponent();
@@ -45,7 +48,7 @@ namespace WinAnaliticPayment
             // Получим льготников из ЭСРН.
             DataResult dataResult = await GetPersonsAsync(progress);
 
-            MessageBox.Show("Прога выполненна - " + 100);
+            MessageBox.Show("Проверка завершена");
 
             if(dataResult != null)
             {
@@ -94,7 +97,8 @@ namespace WinAnaliticPayment
                         itemTotal.CountVvs = gr.Select(w => w.CountVvs).Sum();
                 }
 
-                List<CountPersonResultLK> list = new List<CountPersonResultLK>();
+                // Объявим экземпляр для хранения найденных льготников.
+                list = new List<CountPersonResultLK>();
 
                 list.Add(itemTotal);
 
@@ -155,6 +159,7 @@ namespace WinAnaliticPayment
             // Пройдемся по строкам подключения.
             foreach (KeyValuePair<string, string> dStringConnect in collectionStringDB.StringConnectionsEsrn())
             {
+                // Для теста только по Балаково.
                 //if (dStringConnect.Key.Trim().ToLower() != "балаковский".Trim())
                 //{
                 //    continue;
@@ -353,9 +358,20 @@ namespace WinAnaliticPayment
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            iCount++;
+            if (list != null && list.Count() > 0)
+            {
+                IReport reportExcel = new PrintReport(this.list);
 
-            this.button1.Text = iCount.ToString();
+                reportExcel.Print();
+            }
+            else if (list == null || list.Count() == 0)
+            {
+                MessageBox.Show("Нет данных для печати отчета. Запустите проверку.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //iCount++;
+
+            //this.button1.Text = iCount.ToString();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
