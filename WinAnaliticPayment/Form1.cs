@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinAnaliticPayment.Classess;
 using WinAnaliticPayment.Reports;
+using WinAnaliticPayment.ClassessEspb;
+using WinAnaliticPayment.Factory;
+using WinAnaliticPayment.ConnectionStringEspb;
 
 namespace WinAnaliticPayment
 {
@@ -19,9 +22,24 @@ namespace WinAnaliticPayment
 
         // Переменная для хранения количества льготников.
         List<CountPersonResultLK> list;
+
+        private FactoryConnectionString factoryConnectionString;
+
+        private TravelTicketFactory factoryTravelTicketFactory;
+
+        private FactoryPrintReport factoryPrintReport;
         public Form1()
         {
             InitializeComponent();
+
+            // Фабрика строк подключения к БД ЭСРН с привязкой к ЕСПБ.
+            factoryConnectionString = new FactoryConnectionString();
+
+            // Фабрика льготников купивших билет за два месяца.
+            factoryTravelTicketFactory = new TravelTicketFactory();
+
+            // Фабрика печати отчетов.
+            factoryPrintReport = new FactoryPrintReport();
         }
 
 
@@ -377,6 +395,90 @@ namespace WinAnaliticPayment
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void button2_Click_1(object sender, EventArgs e)
+        {
+
+            List<LogError> listError = new List<LogError>();
+
+            this.progressBar1.Minimum = 0; // по умолчанию
+            this.progressBar1.Maximum = 44; //по умолчанию
+            //                                //progressBar1.Value =0; //по умолчанию
+            this.progressBar1.Step = 1; //по умолчанию
+            ////progressBar1.PerformStep(); //вызываем этот метод для увеличения шкалы progressBar
+
+            var progress = new Progress<int>();
+
+            progress.ProgressChanged += Progress_ProgressChanged1;
+
+            await GetDateAsync(progress, listError);
+
+            if(listError.Count > 0)
+            {
+                this.dataGridView1.DataSource = listError;
+            }
+
+
+        }
+
+        private void Progress_ProgressChanged1(object sender, int e)
+        {
+            //вызываем метод для увеличения шкалы progressBar.
+            progressBar1.PerformStep();
+        }
+
+        private async Task GetDateAsync(IProgress<int> progress, List<LogError> listError)
+        {
+            await Task.Run(() =>
+            {
+                GetDate(progress, listError);
+            });
+
+        }
+
+        private void GetDate(IProgress<int> progress, List<LogError> listError)
+        {
+            // Запрос на подключение к БД ЭСРН с привязкой к ЕСПБ.
+            IQuery querySqlEspb = factoryConnectionString.FactoryConnectionStringEspb();
+
+            // Строки подключения к БД ЭСРН по области.
+            CollectionStringEspb collectionStringDB = factoryConnectionString.GetCollectionStringEspb(querySqlEspb);
+
+            // Строка запроса к БД ЕСПБ.
+            IConnectionString conEspb = factoryConnectionString.GetConnectionStringEspb();
+
+            // Счетчик прогресс бара.
+            int iCountProgress = 0;
+
+            // Пройдемся по строкам подкючения к БД.
+            foreach (var connect in collectionStringDB.StringConnectionsEsrnOuid())
+            {
+                
+                IQuery queryPersonEspb = factoryTravelTicketFactory.QueryGetPersonEspb(connect.Value.AREA_NAME.Trim());
+
+                // Сформируем данные по льготникам купившим билет по двум месяцам.
+                ITravelTcketEspb<string> ttEspb = factoryTravelTicketFactory.GetTicketEspbRegion(conEspb, queryPersonEspb);
+
+                // Создадим временную таблицу и заполним её данными.
+                IQuery queryCreateTempTable = factoryTravelTicketFactory.QueryCreateTempTable(ttEspb.GetTicket());
+
+                // SQL запрос на поиск льготников по району.
+                IQuery getPersonRegion = factoryTravelTicketFactory.GetPersonRegion(queryCreateTempTable.Query());
+
+                // Таблица с содержащая данные о льготниках в районе.
+                DataTable tabPerson = DataTableBD.GetTable(getPersonRegion.Query(), connect.Value.DataSource, "Льготники", listError,connect.Value.AREA_NAME);
+
+                // Сформируем файл Excel с отчетом.
+                IReport report = factoryPrintReport.PrintReportPersonRegion(tabPerson, connect.Value.AREA_NAME);
+                report.Print();
+
+                // Увеличиваем счетчик прогресса.
+                iCountProgress++;
+
+                progress?.Report(iCountProgress);
+
+            }
         }
     }
 }

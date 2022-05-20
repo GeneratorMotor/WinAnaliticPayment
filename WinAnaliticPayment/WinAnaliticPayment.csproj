@@ -73,6 +73,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassessEspb\CollectionStringEspb.cs" />
+    <Compile Include="ClassessEspb\CreateTempTable.cs" />
+    <Compile Include="ClassessEspb\GetConnectionString.cs" />
+    <Compile Include="ClassessEspb\IpAddressOszn.cs" />
+    <Compile Include="ClassessEspb\ITravelTicketEspb.cs" />
+    <Compile Include="ClassessEspb\QueryDataPersonInEspb.cs" />
+    <Compile Include="ClassessEspb\QueryRegion.cs" />
+    <Compile Include="ClassessEspb\TravelTicketEspb.cs" />
     <Compile Include="Classess\AbstractFactoryQuery.cs" />
     <Compile Include="Classess\CollectionStringDB.cs" />
     <Compile Include="Classess\DataResult.cs" />
@@ -105,6 +113,11 @@
     <Compile Include="Classess\TestAsync.cs" />
     <Compile Include="Classess\ЛьготнаяКатегория.cs" />
     <Compile Include="Classess\ТаблицаБД.cs" />
+    <Compile Include="ConnectionStringEspb\ConnectStringEspb.cs" />
+    <Compile Include="ConnectionStringEspb\IConnectionString.cs" />
+    <Compile Include="Factory\FactoryConnectionString.cs" />
+    <Compile Include="Factory\FactoryPrintReport.cs" />
+    <Compile Include="Factory\TravelTicketFactory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +129,7 @@
     <Compile Include="Reports\ItemReport.cs" />
     <Compile Include="Reports\PrintErrorRegions.cs" />
     <Compile Include="Reports\PrintReport.cs" />
+    <Compile Include="Reports\ReportPersonRegion.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
